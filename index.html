@@ -1,0 +1,997 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Tu Historia Preferida - Historias de Audio para Toda la Familia</title>
+    <meta name="description" content="Más de 900 historias de audio dramatizadas en español, inglés y ruso. Contenido bíblico y de valores para niños y familias desde 1985.">
+    
+    <meta property="og:title" content="Tu Historia Preferida - Historias de Audio para Toda la Familia">
+    <meta property="og:description" content="Más de 900 historias dramatizadas que enseñan valores bíblicos y forman el carácter de tus hijos.">
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://historiapreferida.com">
+    <meta property="og:image" content="https://historiapreferida.com/images/logo.png">
+    
+    <link rel="icon" type="image/png" href="images/logo.png">
+    
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    
+    <style>
+        :root {
+            /* Colores oficiales de Tu Historia Preferida */
+            --primary: #E94057;
+            --primary-dark: #d63850;
+            --primary-light: #ff6b7f;
+            --secondary: #4CAF7A;
+            --accent-purple: #8B5CF6;
+            --dark: #1a1a2e;
+            --dark-light: #2d2d44;
+            --light: #f5f5f7;
+            --white: #ffffff;
+            --text-gray: #555;
+        }
+        
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        html { scroll-behavior: smooth; }
+        
+        body {
+            font-family: 'Nunito', sans-serif;
+            color: var(--dark);
+            line-height: 1.6;
+            overflow-x: hidden;
+        }
+        
+        h1, h2, h3, h4 { font-weight: 700; }
+        
+        /* Header */
+        .header {
+            background: var(--white);
+            padding: 0.75rem 2rem;
+            position: fixed;
+            width: 100%;
+            top: 0;
+            z-index: 1000;
+            box-shadow: 0 2px 20px rgba(0,0,0,0.08);
+        }
+        
+        .header-content {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        
+        .logo {
+            display: flex;
+            align-items: center;
+            text-decoration: none;
+        }
+        
+        .logo img {
+            height: 55px;
+            width: auto;
+            border-radius: 8px;
+        }
+        
+        .nav-links {
+            display: flex;
+            gap: 2rem;
+            align-items: center;
+        }
+        
+        .nav-links a {
+            text-decoration: none;
+            color: var(--dark);
+            font-weight: 600;
+            transition: color 0.3s;
+        }
+        
+        .nav-links a:hover { color: var(--primary); }
+        
+        .btn {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+            padding: 0.875rem 1.75rem;
+            border-radius: 50px;
+            font-weight: 700;
+            font-size: 1rem;
+            text-decoration: none;
+            transition: all 0.3s ease;
+            cursor: pointer;
+            border: none;
+        }
+        
+        .btn-primary {
+            background: var(--primary);
+            color: var(--white);
+            box-shadow: 0 4px 15px rgba(233, 64, 87, 0.4);
+        }
+        
+        .btn-primary:hover {
+            background: var(--primary-dark);
+            transform: translateY(-2px);
+            box-shadow: 0 6px 25px rgba(233, 64, 87, 0.5);
+        }
+        
+        .btn-secondary {
+            background: var(--white);
+            color: var(--primary);
+            border: 2px solid var(--primary);
+        }
+        
+        .btn-secondary:hover {
+            background: var(--primary);
+            color: var(--white);
+        }
+        
+        /* Hero */
+        .hero {
+            min-height: 100vh;
+            background: linear-gradient(135deg, var(--dark) 0%, #2a2a4a 100%);
+            position: relative;
+            display: flex;
+            align-items: center;
+            padding: 7rem 2rem 4rem;
+            overflow: hidden;
+        }
+        
+        .hero::before {
+            content: '';
+            position: absolute;
+            top: 0; left: 0; right: 0; bottom: 0;
+            background: url("data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' fill-rule='evenodd'%3E%3Cg fill='%23ffffff' fill-opacity='0.02'%3E%3Cpath d='M36 34v-4h-2v4h-4v2h4v4h2v-4h4v-2h-4zm0-30V0h-2v4h-4v2h4v4h2V6h4V4h-4zM6 34v-4H4v4H0v2h4v4h2v-4h4v-2H6zM6 4V0H4v4H0v2h4v4h2V6h4V4H6z'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E");
+        }
+        
+        .floating-elements {
+            position: absolute;
+            top: 0; left: 0;
+            width: 100%; height: 100%;
+            pointer-events: none;
+            overflow: hidden;
+        }
+        
+        .float-circle {
+            position: absolute;
+            border-radius: 50%;
+            animation: float 6s ease-in-out infinite;
+        }
+        
+        .float-circle:nth-child(1) {
+            width: 300px; height: 300px;
+            background: radial-gradient(circle, rgba(233, 64, 87, 0.2) 0%, transparent 70%);
+            top: 10%; right: 10%;
+        }
+        
+        .float-circle:nth-child(2) {
+            width: 200px; height: 200px;
+            background: radial-gradient(circle, rgba(139, 92, 246, 0.15) 0%, transparent 70%);
+            bottom: 20%; left: 5%;
+            animation-delay: 2s;
+        }
+        
+        .float-circle:nth-child(3) {
+            width: 150px; height: 150px;
+            background: radial-gradient(circle, rgba(76, 175, 122, 0.15) 0%, transparent 70%);
+            top: 50%; left: 20%;
+            animation-delay: 4s;
+        }
+        
+        @keyframes float {
+            0%, 100% { transform: translateY(0) scale(1); }
+            50% { transform: translateY(-30px) scale(1.05); }
+        }
+        
+        .hero-content {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 4rem;
+            align-items: center;
+            position: relative;
+            z-index: 1;
+        }
+        
+        .hero-text { color: var(--white); }
+        
+        .hero-badge {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+            background: rgba(233, 64, 87, 0.2);
+            backdrop-filter: blur(10px);
+            padding: 0.5rem 1rem;
+            border-radius: 50px;
+            font-size: 0.9rem;
+            margin-bottom: 1.5rem;
+            border: 1px solid rgba(233, 64, 87, 0.3);
+            color: var(--white);
+        }
+        
+        .hero-badge span {
+            color: var(--primary-light);
+            font-weight: 700;
+        }
+        
+        .hero h1 {
+            font-size: 3.2rem;
+            line-height: 1.15;
+            margin-bottom: 1.5rem;
+        }
+        
+        .hero h1 .highlight { color: var(--primary); }
+        
+        .hero-description {
+            font-size: 1.2rem;
+            opacity: 0.9;
+            margin-bottom: 2rem;
+            line-height: 1.8;
+        }
+        
+        .hero-buttons {
+            display: flex;
+            gap: 1rem;
+            flex-wrap: wrap;
+        }
+        
+        .hero-card {
+            background: var(--white);
+            border-radius: 24px;
+            padding: 2rem;
+            box-shadow: 0 25px 80px rgba(0,0,0,0.3);
+            transform: rotate(2deg);
+            transition: transform 0.5s ease;
+        }
+        
+        .hero-card:hover {
+            transform: rotate(0deg) scale(1.02);
+        }
+        
+        .hero-stats {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 1.25rem;
+        }
+        
+        .stat-item {
+            text-align: center;
+            padding: 1.25rem;
+            background: var(--light);
+            border-radius: 16px;
+            transition: all 0.3s ease;
+        }
+        
+        .stat-item:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+        }
+        
+        .stat-icon { font-size: 2rem; margin-bottom: 0.5rem; }
+        
+        .stat-number {
+            font-size: 2.25rem;
+            font-weight: 800;
+            color: var(--primary);
+            display: block;
+        }
+        
+        .stat-label {
+            font-size: 0.85rem;
+            color: var(--text-gray);
+            font-weight: 600;
+        }
+        
+        /* Sections Common */
+        .section-header {
+            text-align: center;
+            max-width: 700px;
+            margin: 0 auto 4rem;
+        }
+        
+        .section-tag {
+            display: inline-block;
+            background: var(--primary);
+            color: var(--white);
+            padding: 0.5rem 1.5rem;
+            border-radius: 50px;
+            font-size: 0.85rem;
+            font-weight: 700;
+            margin-bottom: 1rem;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+        
+        .section-header h2 {
+            font-size: 2.5rem;
+            color: var(--dark);
+            margin-bottom: 1rem;
+        }
+        
+        .section-header p {
+            font-size: 1.1rem;
+            color: var(--text-gray);
+        }
+        
+        /* Features */
+        .features {
+            padding: 6rem 2rem;
+            background: var(--white);
+        }
+        
+        .features-grid {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 2rem;
+        }
+        
+        .feature-card {
+            background: var(--light);
+            border-radius: 20px;
+            padding: 2rem;
+            text-align: center;
+            transition: all 0.4s ease;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .feature-card::before {
+            content: '';
+            position: absolute;
+            top: 0; left: 0; right: 0;
+            height: 4px;
+            background: var(--primary);
+            transform: scaleX(0);
+            transition: transform 0.4s ease;
+        }
+        
+        .feature-card:hover::before { transform: scaleX(1); }
+        
+        .feature-card:hover {
+            transform: translateY(-8px);
+            box-shadow: 0 20px 50px rgba(0,0,0,0.1);
+        }
+        
+        .feature-icon {
+            width: 70px; height: 70px;
+            margin: 0 auto 1.25rem;
+            border-radius: 16px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 2rem;
+        }
+        
+        .feature-icon.red { background: rgba(233, 64, 87, 0.15); }
+        .feature-icon.green { background: rgba(76, 175, 122, 0.15); }
+        .feature-icon.purple { background: rgba(139, 92, 246, 0.15); }
+        
+        .feature-card h3 {
+            font-size: 1.3rem;
+            color: var(--dark);
+            margin-bottom: 0.75rem;
+        }
+        
+        .feature-card p {
+            color: var(--text-gray);
+            line-height: 1.7;
+            font-size: 0.95rem;
+        }
+        
+        /* Languages */
+        .languages {
+            padding: 6rem 2rem;
+            background: var(--dark);
+        }
+        
+        .languages .section-header h2,
+        .languages .section-header p { color: var(--white); }
+        .languages .section-tag { background: var(--accent-purple); }
+        
+        .languages-grid {
+            max-width: 900px;
+            margin: 0 auto;
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 2rem;
+        }
+        
+        .language-card {
+            background: rgba(255,255,255,0.05);
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255,255,255,0.1);
+            border-radius: 20px;
+            padding: 2rem 1.5rem;
+            text-align: center;
+            transition: all 0.4s ease;
+        }
+        
+        .language-card:hover {
+            background: rgba(255,255,255,0.1);
+            transform: translateY(-10px);
+            border-color: var(--primary);
+        }
+        
+        .language-flag { font-size: 3.5rem; margin-bottom: 1rem; }
+        
+        .language-card h3 {
+            color: var(--white);
+            font-size: 1.4rem;
+            margin-bottom: 0.5rem;
+        }
+        
+        .language-card p {
+            color: rgba(255,255,255,0.7);
+            font-size: 0.9rem;
+        }
+        
+        /* About */
+        .about {
+            padding: 6rem 2rem;
+            background: var(--white);
+        }
+        
+        .about-content {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 4rem;
+            align-items: center;
+        }
+        
+        .about-card {
+            background: var(--primary);
+            border-radius: 24px;
+            padding: 3rem;
+            color: var(--white);
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .about-card::before {
+            content: '🎧';
+            position: absolute;
+            font-size: 8rem;
+            opacity: 0.1;
+            right: -1rem;
+            bottom: -1rem;
+        }
+        
+        .about-card h3 {
+            font-size: 1.8rem;
+            margin-bottom: 1rem;
+        }
+        
+        .about-card p {
+            font-size: 1.05rem;
+            opacity: 0.95;
+            line-height: 1.8;
+        }
+        
+        .year-badge {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+            background: rgba(255,255,255,0.2);
+            padding: 0.75rem 1.25rem;
+            border-radius: 50px;
+            margin-top: 1.5rem;
+            font-weight: 700;
+            font-size: 0.95rem;
+        }
+        
+        .about-text h2 {
+            font-size: 2.25rem;
+            color: var(--dark);
+            margin-bottom: 1.5rem;
+        }
+        
+        .about-text p {
+            color: var(--text-gray);
+            font-size: 1.05rem;
+            margin-bottom: 1.25rem;
+            line-height: 1.8;
+        }
+        
+        .about-list {
+            list-style: none;
+            margin-bottom: 2rem;
+        }
+        
+        .about-list li {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+            padding: 0.6rem 0;
+            font-size: 1rem;
+            color: var(--dark);
+        }
+        
+        .about-list li::before {
+            content: '✓';
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            width: 26px; height: 26px;
+            background: var(--secondary);
+            color: var(--white);
+            border-radius: 50%;
+            font-size: 0.8rem;
+            font-weight: 700;
+            flex-shrink: 0;
+        }
+        
+        /* Hosts */
+        .hosts {
+            padding: 6rem 2rem;
+            background: var(--light);
+        }
+        
+        .hosts-grid {
+            max-width: 800px;
+            margin: 0 auto;
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 2.5rem;
+        }
+        
+        .host-card {
+            background: var(--white);
+            border-radius: 20px;
+            padding: 2rem;
+            text-align: center;
+            box-shadow: 0 10px 40px rgba(0,0,0,0.06);
+            transition: all 0.4s ease;
+        }
+        
+        .host-card:hover {
+            transform: translateY(-8px);
+            box-shadow: 0 20px 60px rgba(0,0,0,0.1);
+        }
+        
+        .host-avatar {
+            width: 100px; height: 100px;
+            border-radius: 50%;
+            margin: 0 auto 1.25rem;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 3rem;
+        }
+        
+        .host-avatar.male { background: rgba(139, 92, 246, 0.15); }
+        .host-avatar.female { background: rgba(233, 64, 87, 0.15); }
+        
+        .host-card h3 {
+            font-size: 1.4rem;
+            color: var(--dark);
+            margin-bottom: 0.25rem;
+        }
+        
+        .host-role {
+            color: var(--primary);
+            font-weight: 600;
+            margin-bottom: 0.75rem;
+            font-size: 0.95rem;
+        }
+        
+        .host-card p {
+            color: var(--text-gray);
+            font-size: 0.9rem;
+            line-height: 1.7;
+        }
+        
+        /* CTA */
+        .cta {
+            padding: 5rem 2rem;
+            background: var(--primary);
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .cta::before {
+            content: '';
+            position: absolute;
+            top: 0; left: 0; right: 0; bottom: 0;
+            background: url("data:image/svg+xml,%3Csvg width='80' height='80' viewBox='0 0 80 80' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='%23ffffff' fill-opacity='0.08'%3E%3Ccircle cx='40' cy='40' r='4'/%3E%3C/g%3E%3C/svg%3E");
+        }
+        
+        .cta-content {
+            max-width: 650px;
+            margin: 0 auto;
+            position: relative;
+            z-index: 1;
+        }
+        
+        .cta h2 {
+            font-size: 2.5rem;
+            color: var(--white);
+            margin-bottom: 1rem;
+        }
+        
+        .cta p {
+            font-size: 1.15rem;
+            color: rgba(255,255,255,0.9);
+            margin-bottom: 2rem;
+        }
+        
+        .cta .btn-primary {
+            background: var(--white);
+            color: var(--primary);
+            box-shadow: 0 10px 30px rgba(0,0,0,0.2);
+        }
+        
+        .cta .btn-primary:hover {
+            transform: translateY(-3px) scale(1.05);
+        }
+        
+        .trial-badge {
+            display: inline-block;
+            margin-top: 1.5rem;
+            background: rgba(255,255,255,0.2);
+            padding: 0.75rem 1.5rem;
+            border-radius: 50px;
+            color: var(--white);
+            font-weight: 600;
+        }
+        
+        /* Footer */
+        .footer {
+            background: var(--dark);
+            padding: 4rem 2rem 2rem;
+            color: var(--white);
+        }
+        
+        .footer-content {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: grid;
+            grid-template-columns: 2fr 1fr 1fr;
+            gap: 3rem;
+            padding-bottom: 3rem;
+            border-bottom: 1px solid rgba(255,255,255,0.1);
+        }
+        
+        .footer-brand .logo { margin-bottom: 1.5rem; }
+        .footer-brand .logo img { 
+            height: 60px; 
+            border-radius: 10px;
+        }
+        
+        .footer-brand p {
+            color: rgba(255,255,255,0.7);
+            line-height: 1.8;
+            max-width: 320px;
+        }
+        
+        .footer-links h4 {
+            font-size: 1rem;
+            margin-bottom: 1.25rem;
+            color: var(--white);
+        }
+        
+        .footer-links ul { list-style: none; }
+        .footer-links li { margin-bottom: 0.6rem; }
+        
+        .footer-links a {
+            color: rgba(255,255,255,0.7);
+            text-decoration: none;
+            transition: color 0.3s;
+            font-size: 0.95rem;
+        }
+        
+        .footer-links a:hover { color: var(--primary); }
+        
+        .footer-bottom {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding-top: 2rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            color: rgba(255,255,255,0.5);
+            font-size: 0.85rem;
+        }
+        
+        .social-links {
+            display: flex;
+            gap: 0.75rem;
+        }
+        
+        .social-links a {
+            width: 38px; height: 38px;
+            background: rgba(255,255,255,0.1);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: var(--white);
+            text-decoration: none;
+            transition: all 0.3s;
+            font-size: 0.9rem;
+        }
+        
+        .social-links a:hover {
+            background: var(--primary);
+            transform: translateY(-3px);
+        }
+        
+        .mobile-menu-btn {
+            display: none;
+            background: none;
+            border: none;
+            font-size: 1.5rem;
+            cursor: pointer;
+            color: var(--dark);
+        }
+        
+        /* Responsive */
+        @media (max-width: 968px) {
+            .hero-content, .about-content, .footer-content {
+                grid-template-columns: 1fr;
+                text-align: center;
+            }
+            .hero h1 { font-size: 2.5rem; }
+            .hero-buttons { justify-content: center; }
+            .features-grid { grid-template-columns: repeat(2, 1fr); }
+            .languages-grid { grid-template-columns: 1fr; max-width: 350px; }
+            .about-list { text-align: left; max-width: 400px; margin: 0 auto 2rem; }
+            .footer-brand p { max-width: 100%; }
+        }
+        
+        @media (max-width: 768px) {
+            .nav-links { display: none; }
+            .mobile-menu-btn { display: block; }
+            .hero { padding-top: 6rem; }
+            .hero h1 { font-size: 2rem; }
+            .features-grid, .hosts-grid { grid-template-columns: 1fr; }
+            .section-header h2 { font-size: 2rem; }
+            .cta h2 { font-size: 2rem; }
+            .footer-content { grid-template-columns: 1fr; text-align: center; }
+            .footer-bottom { flex-direction: column; gap: 1rem; }
+        }
+    </style>
+</head>
+<body>
+    <header class="header">
+        <div class="header-content">
+            <a href="#" class="logo">
+                <img src="images/logo.png" alt="Tu Historia Preferida">
+            </a>
+            <nav class="nav-links">
+                <a href="#features">Características</a>
+                <a href="#languages">Idiomas</a>
+                <a href="#about">Nosotros</a>
+                <a href="https://app.historiapreferida.com" class="btn btn-primary">Comenzar Ahora</a>
+            </nav>
+            <button class="mobile-menu-btn" aria-label="Menú">☰</button>
+        </div>
+    </header>
+
+    <section class="hero">
+        <div class="floating-elements">
+            <div class="float-circle"></div>
+            <div class="float-circle"></div>
+            <div class="float-circle"></div>
+        </div>
+        <div class="hero-content">
+            <div class="hero-text">
+                <div class="hero-badge">✨ <span>Desde 1985</span> educando con valores</div>
+                <h1>Historias que <span class="highlight">transforman</span> el corazón de tu familia</h1>
+                <p class="hero-description">
+                    Dramatizaciones de audio profesionales basadas en la Biblia, héroes históricos y aventuras reales. 
+                    Actores de voz, efectos de sonido y música que capturan la imaginación.
+                </p>
+                <div class="hero-buttons">
+                    <a href="https://app.historiapreferida.com" class="btn btn-primary">🎧 Escuchar Ahora</a>
+                    <a href="#features" class="btn btn-secondary">Conocer Más</a>
+                </div>
+            </div>
+            <div class="hero-visual">
+                <div class="hero-card">
+                    <div class="hero-stats">
+                        <div class="stat-item">
+                            <div class="stat-icon">📚</div>
+                            <span class="stat-number">900+</span>
+                            <span class="stat-label">Historias</span>
+                        </div>
+                        <div class="stat-item">
+                            <div class="stat-icon">⏱️</div>
+                            <span class="stat-number">400+</span>
+                            <span class="stat-label">Horas</span>
+                        </div>
+                        <div class="stat-item">
+                            <div class="stat-icon">🌍</div>
+                            <span class="stat-number">3</span>
+                            <span class="stat-label">Idiomas</span>
+                        </div>
+                        <div class="stat-item">
+                            <div class="stat-icon">❤️</div>
+                            <span class="stat-number">40+</span>
+                            <span class="stat-label">Años</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="features" class="features">
+        <div class="section-header">
+            <span class="section-tag">¿Por qué elegirnos?</span>
+            <h2>Contenido que educa y entretiene</h2>
+            <p>Historias cuidadosamente producidas que enseñan valores mientras capturan la imaginación</p>
+        </div>
+        <div class="features-grid">
+            <div class="feature-card">
+                <div class="feature-icon red">📖</div>
+                <h3>Historias Bíblicas</h3>
+                <p>Las historias más importantes de la Biblia dramatizadas, haciendo que la Palabra de Dios cobre vida.</p>
+            </div>
+            <div class="feature-card">
+                <div class="feature-icon green">🦸</div>
+                <h3>Héroes Históricos</h3>
+                <p>Biografías de personajes que cambiaron el mundo con su fe, coraje y determinación.</p>
+            </div>
+            <div class="feature-card">
+                <div class="feature-icon purple">💎</div>
+                <h3>Valores y Carácter</h3>
+                <p>Cada historia enseña honestidad, integridad, fe y principios para buenas decisiones.</p>
+            </div>
+            <div class="feature-card">
+                <div class="feature-icon green">👨‍👩‍👧‍👦</div>
+                <h3>Para Toda la Familia</h3>
+                <p>Contenido apropiado para todas las edades que pueden disfrutar juntos padres e hijos.</p>
+            </div>
+            <div class="feature-card">
+                <div class="feature-icon red">🎬</div>
+                <h3>Producción Profesional</h3>
+                <p>Actores de voz talentosos, efectos de sonido descriptivos y música cautivadora.</p>
+            </div>
+            <div class="feature-card">
+                <div class="feature-icon purple">🌐</div>
+                <h3>Multilingüe</h3>
+                <p>Disponible en español, inglés y ruso para familias de todo el mundo.</p>
+            </div>
+        </div>
+    </section>
+
+    <section id="languages" class="languages">
+        <div class="section-header">
+            <span class="section-tag">Alcance Global</span>
+            <h2>Historias en 3 Idiomas</h2>
+            <p>Llegamos a familias de diferentes culturas con el mismo mensaje de esperanza</p>
+        </div>
+        <div class="languages-grid">
+            <div class="language-card">
+                <div class="language-flag">🇪🇸</div>
+                <h3>Español</h3>
+                <p>Tu Historia Preferida desde 1985</p>
+            </div>
+            <div class="language-card">
+                <div class="language-flag">🇺🇸</div>
+                <h3>English</h3>
+                <p>Your Story Hour desde 1949</p>
+            </div>
+            <div class="language-card">
+                <div class="language-flag">🇷🇺</div>
+                <h3>Русский</h3>
+                <p>Час Твоего Рассказа desde 1992</p>
+            </div>
+        </div>
+    </section>
+
+    <section id="about" class="about">
+        <div class="about-content">
+            <div class="about-image">
+                <div class="about-card">
+                    <h3>Nuestra Misión</h3>
+                    <p>Promover el desarrollo positivo del carácter en los niños a través de historias dramatizadas tomadas de las Escrituras, la historia y experiencias de la vida real.</p>
+                    <div class="year-badge">🏆 Más de 75 años de experiencia</div>
+                </div>
+            </div>
+            <div class="about-text">
+                <h2>¿Quiénes Somos?</h2>
+                <p>Tu Historia Preferida es la división en español de Your Story Hour, un ministerio educativo cristiano interdenominacional sirviendo a familias desde 1949.</p>
+                <p>Nuestros programas equipan a los jóvenes para tomar buenas decisiones y enfrentar los desafíos de la vida.</p>
+                <ul class="about-list">
+                    <li>Historias completamente dramatizadas</li>
+                    <li>Sin anuncios ni interrupciones</li>
+                    <li>Contenido seguro para toda la familia</li>
+                    <li>Disponible en cualquier momento</li>
+                    <li>Escucha sin conexión a internet</li>
+                </ul>
+                <a href="https://app.historiapreferida.com" class="btn btn-primary">Explorar Historias</a>
+            </div>
+        </div>
+    </section>
+
+    <section class="hosts">
+        <div class="section-header">
+            <span class="section-tag">Nuestras Voces</span>
+            <h2>Conoce a los Presentadores</h2>
+            <p>Las voces que han acompañado a millones de niños</p>
+        </div>
+        <div class="hosts-grid">
+            <div class="host-card">
+                <div class="host-avatar male">👨</div>
+                <h3>Tío Daniel</h3>
+                <p class="host-role">Tony Escotto</p>
+                <p>Desde 1985 como el querido Tío Daniel, guiando a los niños a través de cada aventura.</p>
+            </div>
+            <div class="host-card">
+                <div class="host-avatar female">👩</div>
+                <h3>Tía Elena</h3>
+                <p class="host-role">Ileana Freeman</p>
+                <p>Con su calidez y sabiduría, inspirando a generaciones de niños a desarrollar su carácter.</p>
+            </div>
+        </div>
+    </section>
+
+    <section class="cta">
+        <div class="cta-content">
+            <h2>¿Listo para comenzar?</h2>
+            <p>Únete a miles de familias que ya disfrutan de historias que educan, entretienen e inspiran.</p>
+            <a href="https://app.historiapreferida.com/#!/registration" class="btn btn-primary">🎧 Crear Cuenta Gratis</a>
+            <div class="trial-badge">✨ ¡Prueba gratis por 7 días!</div>
+        </div>
+    </section>
+
+    <footer class="footer">
+        <div class="footer-content">
+            <div class="footer-brand">
+                <a href="#" class="logo">
+                    <img src="images/logo.png" alt="Tu Historia Preferida">
+                </a>
+                <p>Dramatizaciones de audio para toda la familia basadas en la Biblia, héroes históricos y aventuras reales desde 1985.</p>
+            </div>
+            <div class="footer-links">
+                <h4>Enlaces</h4>
+                <ul>
+                    <li><a href="https://app.historiapreferida.com">Escuchar</a></li>
+                    <li><a href="#features">Características</a></li>
+                    <li><a href="#about">Nosotros</a></li>
+                    <li><a href="https://www.yourstoryhour.org">Your Story Hour</a></li>
+                </ul>
+            </div>
+            <div class="footer-links">
+                <h4>Contacto</h4>
+                <ul>
+                    <li><a href="mailto:info@tuhistoriapreferida.com">info@tuhistoriapreferida.com</a></li>
+                    <li><a href="https://www.tuhistoriapreferida.com">tuhistoriapreferida.com</a></li>
+                </ul>
+            </div>
+        </div>
+        <div class="footer-bottom">
+            <p>© 2025 Tu Historia Preferida. Todos los derechos reservados.</p>
+            <div class="social-links">
+                <a href="#" aria-label="Facebook">f</a>
+                <a href="#" aria-label="YouTube">▶</a>
+                <a href="#" aria-label="Instagram">✦</a>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                const target = document.querySelector(this.getAttribute('href'));
+                if (target) target.scrollIntoView({ behavior: 'smooth', block: 'start' });
+            });
+        });
+
+        const header = document.querySelector('.header');
+        window.addEventListener('scroll', () => {
+            header.style.boxShadow = window.scrollY > 100 ? '0 4px 30px rgba(0,0,0,0.12)' : '0 2px 20px rgba(0,0,0,0.08)';
+        });
+    </script>
+</body>
+</html>
